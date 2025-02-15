@@ -1,46 +1,179 @@
+import Category from "../models/category.js";
+import Sub_Category from "../models/sub_category.js";
 import Task from "../models/task.js";
+import TaskDetails from "../models/taskdetails.js";
 import User from '../models/user.js'; // Adjust the path if necessary
 import { Sequelize } from 'sequelize'; 
-export const createTask = async (req, res) => {
-    try {
-      // Match these field names with those in your Task model (case-sensitive)
-      const { 
-        main_title, 
-        sub_title, 
-        description, 
-        assigned_to, 
-        duration, 
-        day_period, 
-        status, 
-        ending_date, 
-        comments, 
-        is_archive 
-      } = req.body;
+// export const createTask = async (req, res) => {
+//     try {
+//       // Match these field names with those in you
+//       // r Task model (case-sensitive)
+      
+//       const { 
+//         main_title, 
+//         sub_title, 
+//         description, 
+//         assigned_to, 
+//         duration, 
+//         day_period, 
+//         status, 
+//         ending_date, 
+//         comments, 
+//         is_archive,
+//         create_date
+//       } = req.body;
   
-      // Create a new task using the Sequelize model
-      const newTask = await Task.create({
-        main_title,
-        sub_title,
-        description,
-        assigned_to,
-        duration,
-        day_period,
-        status,
-        ending_date,
-        comments,
-        is_archive,
+//       // Create a new task using the Sequelize model
+//       const newTask = await Task.create({
+//         main_title,
+//         sub_title,
+//         description,
+//         assigned_to,
+//         duration,
+//         day_period,
+//         status,
+//         ending_date,
+//         comments,
+//         is_archive,
+//         create_date
         
+//       });
+//       const newCategory = await Category.create({
+//         description
+//       });
+
+
+//       res.status(201).json({
+//         message: "Task saved successfully",
+//         task: newTask,
+//         category: newCategory
+//       });
+//     } catch (error) {
+//       console.error("Error creating task:", error);
+//       res.status(500).json({ message: "Internal Server Error" });
+//     }
+//   };
+
+// export const createTask = async (req, res) => {
+//   try {
+//     const { 
+//       main_title, 
+//       sub_title, 
+//       description, 
+//       assigned_to, 
+//       duration, 
+//       day_period, 
+//       status, 
+//       ending_date, 
+//       comments, 
+//       is_archive,
+//       create_date,
+//       category // Ye naya field h
+//       sub_category
+//     } = req.body;
+
+//     // Task create karo
+//     const newTask = await Task.create({
+//       main_title,
+//       sub_title,
+//       description,
+//       assigned_to,
+//       duration,
+//       day_period,
+//       status,
+//       ending_date,
+//       comments,
+//       is_archive,
+//       create_date
+//     });
+
+//     let newCategory = null;
+//     if (category) {
+//       newCategory = await Category.create({
+//         cat_description: category.cat_description
+//       });
+//     }
+
+//     let newSubCategory = null;
+//     if (sub_category) {
+//       newSubCategory = await Sub_Category.create({
+//         sub_cat_description: category.sub_cat_description
+//       });
+//     }
+
+//     res.status(201).json({
+//       message: "Task saved successfully",
+//       task: newTask,
+//       category: newCategory
+//       sub_category: newSubCategory
+//     });
+//   } catch (error) {
+//     console.error("Error creating task:", error);
+//     res.status(500).json({ message: "Internal Server Error" });
+//   }
+// };
+
+
+export const createTask = async (req, res) => {
+  try {
+    const { 
+      main_title, 
+      sub_title, 
+      description, 
+      assigned_to, 
+      duration, 
+      day_period, 
+      status, 
+      ending_date, 
+      comments, 
+      is_archive,
+      create_date,
+      category, // Ye naya field h
+      sub_category,
+      created_user
+    } = req.body;
+
+    // Task create karo
+    const newTask = await Task.create({
+      main_title,
+      sub_title,
+      description,
+      assigned_to,
+      duration,
+      day_period,
+      status,
+      ending_date,
+      comments,
+      is_archive,
+      create_date,
+      created_user
+    });
+
+    let newCategory = null;
+    if (category && category.cat_description) {
+      newCategory = await Category.create({
+        cat_description: category.cat_description
       });
-  
-      res.status(201).json({
-        message: "Task saved successfully",
-        task: newTask,
-      });
-    } catch (error) {
-      console.error("Error creating task:", error);
-      res.status(500).json({ message: "Internal Server Error" });
     }
-  };
+
+    let newSubCategory = null;
+    if (sub_category && sub_category.sub_cat_description) {
+      newSubCategory = await Sub_Category.create({
+        sub_cat_description: sub_category.sub_cat_description
+      });
+    }
+
+    res.status(201).json({
+      message: "Task saved successfully",
+      task: newTask,
+      category: newCategory,
+      sub_category: newSubCategory
+    });
+  } catch (error) {
+    console.error("Error creating task:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
   
   // Get all Tasks
 //   export const getAllTasks = async (req, res) => {
@@ -155,11 +288,43 @@ export const getAllTasks = async (req, res) => {
       res.status(500).json({ message: "Internal Server Error" });
     }
   };
-  
+  export const updateTaskDetailsDescription = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { description } = req.body;
+
+        const task = await TaskDetails.findByPk(id);
+
+        if (!task) {
+            return res.status(404).json({ message: "Task not found" });
+        }
+
+        // Sirf description update karna hai
+        task.description = description;
+
+        await task.save();
+
+        res.status(200).json(task);
+    } catch (error) {
+        console.error("Error updating task:", error);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+};
+
   // Delete a Task
   export const deleteTask = async (req, res) => {
     try {
       const { id } = req.params;
+
+      const taskDetails = await TaskDetails.findAll({ where: { taskId: id } });
+        
+      if (taskDetails.length > 0) {
+          // Agar task details exist karte hain, to delete karo
+          await TaskDetails.destroy({ where: { taskId: id } });  // ✅ Model ka sahi reference use karo
+          console.log("Task Details deleted.");
+      } 
+
+      console.log("id = " + id);
       console.log("id = "+ id)
       const task = await Task.findByPk(id);
       console.log("task = "+ task)
@@ -169,6 +334,7 @@ export const getAllTasks = async (req, res) => {
       }
   
       await task.destroy();
+      
       res.status(200).json({ message: "Task deleted successfully" });
     } catch (error) {
       console.error("Error deleting task:", error);
@@ -195,6 +361,26 @@ export const getAllTasks = async (req, res) => {
       res.status(500).json({ message: "Internal Server Error" }); // Handle errors
     }
   };
+
+  export const restoreTask = async (req, res) => {
+    try {
+        const { id } = req.params; // Task ID
+
+        const task = await Task.findByPk(id);
+        if (!task) {
+            return res.status(404).json({ message: "Task not found" });
+        }
+
+        task.is_archive = false; // Restore task (set archive flag to false)
+        await task.save();
+
+        res.status(200).json({ message: "Task restored successfully" });
+    } catch (error) {
+        console.error("Error restoring task:", error);
+        res.status(500).json({ message: "Internal Server Error" });
+    }
+};
+
   
 
 //   export const getAllArchiveTasks = async (req, res) => {
@@ -230,7 +416,73 @@ export const updateTaskStatus = async (req, res) => {
     }
 
     // Update the task's status to "completed"
-    task.status = "completed";
+    task.status = "complete";
+    await task.save();  // Save the updated task back to the database
+
+    // Return a success response
+    res.status(200).json({ message: "Task status updated successfully", task });
+  } catch (error) {
+    console.error("Error updating task status:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+export const StartTask = async (req, res) => {
+  try {
+    const { id } = req.params;  // Extract task ID from the request parameters
+
+    // Find the task by ID
+    const task = await Task.findByPk(id);
+
+    if (!task) {
+      return res.status(404).json({ message: "Task not found" });
+    }
+
+    // Update the task's status to "completed"
+    task.status = "Start";
+    await task.save();  // Save the updated task back to the database
+
+    // Return a success response
+    res.status(200).json({ message: "Task status updated successfully", task });
+  } catch (error) {
+    console.error("Error updating task status:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+export const PauseTask = async (req, res) => {
+  try {
+    const { id } = req.params;  // Extract task ID from the request parameters
+
+    // Find the task by ID
+    const task = await Task.findByPk(id);
+
+    if (!task) {
+      return res.status(404).json({ message: "Task not found" });
+    }
+
+    // Update the task's status to "completed"
+    task.status = "Pause";
+    await task.save();  // Save the updated task back to the database
+
+    // Return a success response
+    res.status(200).json({ message: "Task status updated successfully", task });
+  } catch (error) {
+    console.error("Error updating task status:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+export const CompleteTask = async (req, res) => {
+  try {
+    const { id } = req.params;  // Extract task ID from the request parameters
+
+    // Find the task by ID
+    const task = await Task.findByPk(id);
+
+    if (!task) {
+      return res.status(404).json({ message: "Task not found" });
+    }
+
+    // Update the task's status to "completed"
+    task.status = "Complete";
     await task.save();  // Save the updated task back to the database
 
     // Return a success response
@@ -276,3 +528,6 @@ export const getAllArchiveTasks = async (req, res) => {
       res.status(500).json({ message: 'Internal Server Error' });
     }
   };
+
+
+  

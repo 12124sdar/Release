@@ -35,7 +35,10 @@ const TaskDetails = sequelize.define('TaskDetails', {
       model: Task,  
       key: 'id',    
     }
-  }
+  },
+  created_by: {
+    type: DataTypes.TEXT,
+  },
 }, {
   tableName: 'task_details',  
   timestamps: false,          

@@ -46,6 +46,9 @@ create_date: {
     type: DataTypes.DATE,
     defaultValue: DataTypes.NOW,
   },
+  created_user: {
+    type: DataTypes.STRING,
+  },
 }, {
   tableName: 'tasks', // Ensure the table name matches the DB table (lowercase)
   timestamps: false // Set to true if your table has createdAt/updatedAt fields

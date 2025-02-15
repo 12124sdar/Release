@@ -1,6 +1,7 @@
 import { Sequelize } from "sequelize";
 import config from "./config/config.json" assert { type: "json" };
 
+
 // Development Configuration
 const dbConfig = config.development;
 

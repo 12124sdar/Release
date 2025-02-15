@@ -2,6 +2,8 @@
 import User from "../models/user.js";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import Category from "../models/category.js";
+import Sub_Category from "../models/sub_category.js";
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your_jwt_secret_key';
 
@@ -46,6 +48,33 @@ export const createUser = async (req, res) => {
     }
   };
 
+
+
+  export const getAllCategory = async (req, res) => {
+    try {
+      const users = await Category.findAll({
+        order: [['id', 'ASC']] // Order by id in ascending order
+      });
+    
+      res.status(200).json(users);
+    } catch (error) {
+      console.error("Error fetching Category:", error);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  };
+  export const getAllSubCategoryList = async (req, res) => {
+    try {
+      const users = await Sub_Category.findAll({
+        order: [['id', 'ASC']] // Order by id in ascending order
+      });
+    
+      res.status(200).json(users);
+    } catch (error) {
+      console.error("Error fetching Sub Category:", error);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  };
+
   
   export const getUserById = async (req, res) => {
     try {
@@ -78,7 +107,7 @@ export const createUser = async (req, res) => {
       // Update user fields
 
       const hashedPassword = await bcrypt.hash(password, 10); 
- 
+ console.log("hashedpaaa",hashedPassword)
       user.username = req.body.userName || user.username;
       user.password = hashedPassword || user.password;
       user.email = email || user.email;
@@ -123,7 +152,6 @@ export const createUser = async (req, res) => {
   export const loginUser = async (req, res) => {
     try {
       const { username, password } = req.body;
-  
       // Find user by email
       const user = await User.findOne({ where: { username } });
   
@@ -134,6 +162,12 @@ export const createUser = async (req, res) => {
       // Compare the provided password with the hashed password in the database
       const isMatch = await bcrypt.compare(password, user.password);
   
+
+console.log("User Input Password:", password);
+console.log("Hashed Password from DB:", user.password);
+console.log("Passwords Match:", isMatch);
+
+
       if (!isMatch) {
         return res.status(400).json({ message: 'Invalid credentials' });
       }
@@ -147,7 +181,7 @@ export const createUser = async (req, res) => {
   
       const token = jwt.sign(payload, JWT_SECRET, { expiresIn: '1h' });
   
-      res.status(200).json({ token, username: user.username });
+      res.status(200).json({ token, username: user.username  });
     } catch (error) {
       console.error('Error logging in:', error);
       res.status(500).json({ message: 'Internal Server Error' });
