@@ -1,0 +1,188 @@
+{
+    "HEADER": {
+        "TITLE": "Task Management System",
+        "LANGUAGE": "Language: "
+    },
+    "NAV": {
+        "ITEM1": "Tasks",
+        "ITEM2": "Manage Users",
+        "ITEM3": "Ad. Search",
+        "ITEM4": "Archives"
+    },
+    
+        "LOGIN": {
+          "TITLE": "Login",
+          "APP_TITLE": "TASK MANAGEMENT SYSTEM",
+          "DESCRIPTION": "Manage your tasks efficiently with our powerful system.",
+          "USERNAME": "Username: ",
+          "PLACEHOLDER_USERNAME": "Enter your username",
+          "USERNAME_REQUIRED": "Username is required",
+          "PASSWORD": "Password: ",
+          "PLACEHOLDER_PASSWORD": "Enter your password",
+          "PASSWORD_REQUIRED": "Password is required",
+          "INVALID_USERNAME": "Invalid username",
+          "INVALID_PASSWORD": "Invalid password",
+          "INVALID_CREDENTIALS": "Invalid credentials",
+          "GENERAL_ERROR": "Something went wrong. Please try again."
+        },
+      
+      
+    "TASKS": {
+        "TITLE": "Task List",
+        "SEARCH_PLACEHOLDER": "Search Tasks",
+        "TABLE": {
+            "COLUMN_1": "Date Added",
+            "COLUMN_2": "File No.",
+            "COLUMN_3": "Assign To",
+            "COLUMN_4": "Main Category",
+            "COLUMN_5": "Sub Title",
+            "COLUMN_6": "Title",
+            "COLUMN_7": "Mission Duration",
+            "COLUMN_8": "Days from the date of entry",
+            "COLUMN_9": "Status",
+            "COLUMN_10": "Actions",
+            "COLUMN_11": "Procedures",
+            "COLUMN_12": "Receiving the letter",
+            "FOOTER_TEXT": "Name ______________________________ I received a copy of the letter _____________________________"
+        },
+        "ADD_NEW_TASK_FORM": {
+            "TITLE": "Add New Task",
+            "FIELD_1": "Date of Creation: ",
+            "FIELD_2": "Title: ",
+            "FIELD_3": "Main Category: ",
+            "FIELD_4": "Remember Main Category",
+            "FIELD_5": "Sub-Category",
+            "FIELD_6": "Remember Sub-Category",
+            "FIELD_7": "Assign To",
+            "FIELD_8": "Maximum No. of Days",
+            "FIELD_9": "Description",
+            "FIELD_10": "Edit New Task",
+            "FIELD_11": "Remember Assign To"
+            
+        },
+        "TASK_DETAILS": {
+            "TITLE": "File No.",
+            "FIELD_1": "From: ",
+            "FIELD_2": "To: ",
+            "FIELD_3": "Main Category: ",
+            "FIELD_4": "Sub Category: ",
+            "FIELD_5": "Subject: ",
+            "FIELD_6": "No. ",
+            "FIELD_7": "Start Date: ",
+            "FIELD_8": "Day: ",
+            "FIELD_9": "Duration of the mission: ",
+            "FIELD_10": "Number of days from start: ",
+            "ADDITION_FORM": {
+                "TITLE": "Add to File",
+                "FIELD_1" : "Date Added",
+                "FIELD_2" : "Description"
+            },
+            "FIELD_11": "Edit",
+            "FIELD_12":"Save",
+            "FIELD_13":"Cancel",
+            "FIELD_14":"Title:",
+            "FIELD_15":"Description: "
+
+        }
+    },
+    "USERS": {
+        "TITLE": "User List",
+        "SEARCH_PLACEHOLDER": "Search Users",
+        "TABLE": {
+            "COLUMN_1": "Username",
+            "COLUMN_2": "Email",
+            "COLUMN_3": "Account Status",
+            "COLUMN_4": "Actions"
+        },
+        "USER_FORM": {
+            "TITLE_NEW": "Add New User",
+            "TITLE_EDIT": "Edit User",
+            "FIELD_1": "Username: ",
+            "FIELD_2": "Email: ",
+            "FIELD_3": "Role: ",
+            "FIELD_4": "Password",
+            "FIELD_5": "Active"
+        }
+    },
+    "ARCHIVES": {
+        "TITLE": "Archive List",
+        "SEARCH_PLACEHOLDER": "Search Tasks",
+        "TABLE": {
+            "COLUMN_1": "File No.",
+            "COLUMN_2": "Date Added",
+            "COLUMN_3": "Assign To",
+            "COLUMN_4": "Main Category",
+            "COLUMN_5": "Sub Title",
+            "COLUMN_6": "Title",
+            "COLUMN_7": "Mission Duration",
+            "COLUMN_8": "Days from the date of entry",
+            "COLUMN_9": "Status",
+            "COLUMN_10": "Archive Status"
+        },
+        "TASK_DETAILS": {
+            "TITLE": "Tasks Details",
+            "FIELD_1": "File No: ",
+            "FIELD_2": "Assign To: ",
+            "FIELD_3": "Main Category: ",
+            "FIELD_4": "Sub Category: ",
+            "FIELD_5": "Title: ",
+            "FIELD_6": "Date Created: ",
+            "FIELD_7": "Maximum No. of Days:",
+            "FIELD_8": "Status: "
+        }
+
+    },
+    "ADVANCED_SEARCH": {
+        "TITLE": "Advanced Search",
+        "FILTER_LABELS": {
+            "TITLE": "Filters",
+            "DATE_FROM": "Date From: ",
+            "DATE_TO": "Date To: ",
+            "NAME": "Assign To: ",
+            "MAIN_TITLE": "Main Category: ",
+            "SUB_TITLE": "Sub Title: ",
+            "TOPIC": "Title: "
+        },
+        "SEARCH_RESULTS": {
+            "TITLE": "Search Results",
+            "COLUMN_1": "Date Added",
+            "COLUMN_2": "File Number",
+            "COLUMN_3": "Assign To",
+            "COLUMN_4": "Main Category",
+            "COLUMN_5": "Sub Title",
+            "COLUMN_6": "Title",
+            "COLUMN_7": "Mission Duration",
+            "COLUMN_8": "Days from the date of entry"
+        }
+    },
+    "BUTTONS": {
+        "QUICK_SEARCH": "Quick Search",
+        "SEARCH": "Search",
+        "CLEAR": "Clear",
+        "PRINT": "Print",
+        "PRINT_ALL": "Print All",
+        "PRINT_ALL_EDITS": "Print All Edits",
+        "ADDITION": "Addition",
+        "ADD_TASK": "Add New Task",
+        "ADD_USER": "Add New User",
+        "WATCH": "View",
+        "RESTORATION": "Restoration",
+        "ARCHIVE": "Archive",
+        "DELETE": "Delete",
+        "EDIT": "Edit",
+        "CLOSE": "Close",
+        "SAVE": "Save",
+        "CANCEL": "Cancel",
+        "HOME": "Home",
+        "ENDING": "End",
+        "AMENDMENT": "Edit",
+        "LOGIN": "Login",
+        "LOG_OUT": "Log Out",
+        "CLOSING": "Closing",
+        "UNDO":"Undo Start",
+        "EDITDETAILS":"Edit",
+        "UPDATE":"Update"
+    }
+  
+
+}
